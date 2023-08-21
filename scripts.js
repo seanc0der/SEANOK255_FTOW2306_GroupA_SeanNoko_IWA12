@@ -34,6 +34,20 @@ checkinButtons.forEach((button) => {
 	button.style.color = "";
 });
 
+const toggleButtons = function (bookElement, statusIndicator) {
+	const reserveButton = bookElement.querySelector(".reserve");
+	const checkoutButton = bookElement.querySelector(".checkout");
+	const checkinButton = bookElement.querySelector(".checkin");
+
+	const reserveToggled = STATUS_MAP[statusIndicator].canReserve;
+	const checkoutToggled = STATUS_MAP[statusIndicator].canCheckout;
+	const checkinToggled = STATUS_MAP[statusIndicator].canCheckIn;
+
+	reserveButton.disabled = !reserveToggled;
+	checkoutButton.disabled = !checkoutToggled;
+	checkinButton.disabled = !checkinToggled;
+};
+
 statusElements.forEach((statusElement) => {
 	let bookElement = statusElement.parentElement.parentElement;
 	let statusIndicator = statusElement.textContent;
@@ -54,17 +68,3 @@ statusElements.forEach((statusElement) => {
 			break;
 	}
 });
-
-function toggleButtons(bookElement, statusIndicator) {
-	const reserveButton = bookElement.querySelector(".reserve");
-	const checkoutButton = bookElement.querySelector(".checkout");
-	const checkinButton = bookElement.querySelector(".checkin");
-
-	const reserveToggled = STATUS_MAP[statusIndicator].canReserve;
-	const checkoutToggled = STATUS_MAP[statusIndicator].canCheckout;
-	const checkinToggled = STATUS_MAP[statusIndicator].canCheckIn;
-
-	reserveButton.disabled = !reserveToggled;
-	checkoutButton.disabled = !checkoutToggled;
-	checkinButton.disabled = !checkinToggled;
-}
